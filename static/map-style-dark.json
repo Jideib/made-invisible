@@ -1,0 +1,37 @@
+{
+  "version": 8,
+  "name": "Nigeria Dark",
+  "sources": {
+    "nigeria": {
+      "type": "geojson",
+      "data": "/data/nigeria.json"
+    }
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#000000"
+      }
+    },
+    {
+      "id": "nigeria-fill",
+      "type": "fill",
+      "source": "nigeria",
+      "paint": {
+        "fill-color": "#1d1d1d",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "nigeria-outline",
+      "type": "line",
+      "source": "nigeria",
+      "paint": {
+        "line-color": "#777",
+        "line-width": 1.6
+      }
+    }
+  ]
+}
