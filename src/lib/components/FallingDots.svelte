@@ -6,16 +6,15 @@
   export let map;
   export let activeIndex = -1;
   export let onPosition = null;
-
+  export let showAll = false;
+  export let forceDropAll = false;
 
   let dots = [];
 
   onMount(() => {
     const w = window.innerWidth;
-    
-    // Initialize dots for all incidents
     dots = incidents.map((_, i) => ({
-      i,  // This is i, not index
+      i,
       x: w * 0.55,
       y: -50,
       targetY: null,
@@ -24,63 +23,59 @@
     }));
   });
 
+  // Trigger new drop
   $: if (map && activeIndex >= 0 && activeIndex < incidents.length) {
     const dot = dots[activeIndex];
-    if (dot && !dot.landed) {
-      drop(dot);
-    }
+    if (dot && !dot.landed) drop(dot);
   }
 
-  // Make dots invisible when not active
-  $: if (activeIndex === -1) {
-    // Hide all dots
+  // ✔️ reset ONLY when not in summary & no active incident
+  $: if (!showAll && activeIndex === -1) {
     dots.forEach(d => {
-      if (d.landed) {
-        d.visible = false;
-        d.landed = false;
-      }
+      d.visible = false;
+      d.landed = false;
     });
     dots = [...dots];
   }
 
+  // Trigger all drops in summary view
+  $: if (map && showAll && forceDropAll) {
+    dots.forEach(d => {
+      if (!d.landed) drop(d);
+      d.visible = true;
+    });
+  }
+
   async function drop(dot) {
-  dot.visible = true;
+    dot.visible = true;
 
-  const pos = projectToScreen(map, incidents[dot.i].coords);
-  if (!pos) return;
+    const pos = projectToScreen(map, incidents[dot.i].coords);
+    if (!pos) return;
 
-  dot.x = pos.x;
-  dot.targetY = pos.y;
-  dot.y = -50;
+    dot.x = pos.x;
+    dot.targetY = pos.y;
+    dot.y = -50;
 
-  while (dot.y < dot.targetY) {
-    dot.y += 12;
-    dots = [...dots];
+    while (dot.y < dot.targetY) {
+      dot.y += 12;
+      dots = [...dots];
 
-    // LIVE POSITION
-    if (onPosition) {
-      onPosition({ index: dot.i, x: dot.x, y: dot.y });
+      if (onPosition) onPosition({ index: dot.i, x: dot.x, y: dot.y });
+      await tick();
     }
 
-    await tick();
+    dot.landed = true;
+    dots = [...dots];
+
+    if (onPosition) onPosition({ index: dot.i, x: dot.x, y: dot.targetY });
   }
-
-  dot.landed = true;
-  dots = [...dots];
-
-  // FINAL POSITION
-  if (onPosition) {
-    onPosition({ index: dot.i, x: dot.x, y: dot.targetY });
-  }
-}
-
 </script>
 
 {#each dots as d (d.i)}
-  <!-- FIX: Use d.i for comparison, not d.index -->
   <div
     class="dot"
-    class:active={d.visible && d.i === activeIndex}
+    class:active={showAll || (d.visible && d.i === activeIndex)}
+    class:summary={showAll}
     style="left:{d.x}px; top:{d.y}px"
   ></div>
 {/each}
@@ -102,6 +97,7 @@
   opacity: 1;
 }
 
+/* Pulse ring animation */
 .dot::after {
   content: "";
   position: absolute;
@@ -116,15 +112,13 @@
   animation: pulse 700ms ease-out;
 }
 
-@keyframes pulse {
-  0% {
-    opacity: 0.8;
-    transform: scale(0.6);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.4);
-  }
+.dot.summary {
+  opacity: 0.55;
+  transform: scale(0.9);
 }
 
+@keyframes pulse {
+  0% { opacity: 0.8; transform: scale(0.6); }
+  100% { opacity: 0; transform: scale(1.4); }
+}
 </style>
