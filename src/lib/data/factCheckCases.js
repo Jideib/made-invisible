@@ -1,54 +1,85 @@
+// src/lib/data/factCheckCases.js
+// Fact-checking section — 5 strongest "claim vs evidence" cases only
+
 export const factCheckCases = [
   {
-    id: "baga-2013",
-    title: "Baga, Borno – 2013",
-    official: "Nigerian Defence spokespeople stated only 30 insurgents were killed and minimal structures were damaged.",
-    evidence: "Amnesty & HRW satellite imagery showed over 2,300 homes burned.",
-    before: "/facts/baga-before.png",
-    after: "/facts/baga-after.png",
+    id: "giwa-2014",
+    title: "Giwa Barracks – Maiduguri (2014)",
+    official: [
+      "Nigerian Army: detainees were 'terror suspects' — no extrajudicial killings",
+      "Claim: all force used was 'within military rules of engagement'"
+    ],
+    evidence: [
+      "Amnesty: 640+ recaptured detainees executed — video verified",
+      "Witnesses: Throats slit — bodies dumped in mass piles"
+    ],
+    before: "/images/facts/giwa-before.jpg",
+    after: "/images/facts/giwa-after.jpg",
     links: [
-      "https://www.hrw.org/news/2013/05/01/nigeria-baga-photos-show-widespread-destruction",
-      "https://www.amnesty.org/en/latest/news/2013/05/nigeria-investigate-military-baga/"
+      "https://www.amnesty.org/en/latest/news/2014/08/nigeria-mass-killings/",
+      "https://www.bbc.com/news/world-africa-26829457"
     ]
   },
+
   {
-    id: "zaria-2015",
-    title: "Zaria IMN – 2015",
-    official: "Federal Government claimed 7 IMN members died while resisting arrest.",
-    evidence: "Judicial inquiry & Amnesty: mass killing of 300+, satellite grave trenches.",
-    before: "/facts/zaria-before.png",
-    after: "/facts/zaria-after.png",
+    id: "zaria-imn-2015",
+    title: "Zaria IMN – Kaduna (2015)",
+    official: [
+      "Federal Government: Only 7 protesters died while resisting arrest"
+    ],
+    evidence: [
+      "Judicial inquiry: 300+ unarmed IMN members killed, many dumped in mass graves",
+      "Satellite analysis of trench burials"
+    ],
+    before: "/images/facts/zaria-before.png",
+    after: "/images/facts/zaria-after.png",
     links: [
       "https://www.amnesty.org/en/documents/afr44/2749/2015/en/",
       "https://www.bbc.com/news/world-africa-35339109"
     ]
   },
+
   {
-    id: "odi-1999",
-    title: "Odi, Bayelsa – 1999",
-    official: "Military claimed 'offensive on militants' – collateral minimal.",
-    evidence: "Journalists & NGO photos show town flattened, civilian homes destroyed.",
-    before: "/facts/odi-before.jpg",
-    after: "/facts/odi-after.jpg",
-    links: [
-      "https://www.theguardian.com/world/1999/nov/23/chrismcgreal",
-      "https://www.hrw.org/legacy/press/1999/11/nibg1123.htm"
-    ]
+    id: "bama-2013",
+    title: "Bama – Borno (2013)",
+    official: [
+      "Army: 'Terrorist hideout destroyed – zero civilian loss'",
+      "Claim: operations targeted only militants"
+    ],
+    evidence: [
+      "Satellite: scorch pattern inside residential grid",
+      "Residents: dozens executed after detention screening"
+    ],
+    before: "/images/facts/bama-before.png",
+    after: "/images/facts/bama-after.png"
   },
+
   {
-    id: "bama-2014",
-    title: "Bama, Borno – 2014",
-    official: "Army statement: 'terrorist hideouts destroyed – zero civilian loss'.",
-    evidence: "VOA & Sat images: scorch pattern in residential grid – civilian structures.",
-    before: "/facts/bama-before.png",
-    after: "/facts/bama-after.png"
+    id: "ihioma-2022",
+    title: "Ihioma – Imo (2022)",
+    official: [
+      "Army: 'Firefight with IPOB members — no civilian targeting'"
+    ],
+    evidence: [
+      "Residents: 4 people killed as soldiers opened fire indiscriminately",
+      "Spatio-temporal OSINT confirms sporadic firing zone"
+    ],
+    before: "/images/facts/ihioma-before.jpg",
+    after: "/images/facts/ihioma-after.jpg"
   },
+
   {
-    id: "potiskum-2014",
-    title: "Potiskum, Yobe – 2014",
-    official: "Raid neutralized terrorist cell – limited confrontation.",
-    evidence: "Press photos show children killed, eyewitness counts contradict.",
-    before: "/facts/potiskum-before.png",
-    after: "/facts/potiskum-after.png"
+    id: "lamurde-2025",
+    title: "Lamurde – Adamawa (2025)",
+    official: [
+      "Army: 'Casualties were caused by untrained militias mishandling weapons'",
+      "Claim: Army did not fire on protesters"
+    ],
+    evidence: [
+      "Amnesty AI: unarmed women shot during protest",
+      "Video surface shows uniform firing pattern"
+    ],
+    before: "/images/facts/lamurde-before.jpg",
+    after: "/images/facts/lamurde-after.jpg"
   }
 ];

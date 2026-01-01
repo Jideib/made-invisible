@@ -1,35 +1,38 @@
 <script>
-  import { createEventDispatcher, onMount, onDestroy } from "svelte";
+  import { onMount, onDestroy, createEventDispatcher } from "svelte";
 
   export let index;
-  let el;
-  let observer;
   const dispatch = createEventDispatcher();
 
+  let observer;
+  let el;
+
   onMount(() => {
+    // prevent SSR crash
+    if (typeof window === "undefined" || !el) return;
+
     observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          dispatch("enter", index);
-        }
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) dispatch("enter", { index });
+        else dispatch("exit", { index });
       },
-      { threshold: 0.6 }
+      {
+        root: null,
+        threshold: 0.4,
+      }
     );
 
     observer.observe(el);
+
+    return () => observer?.disconnect();
   });
 
-  onDestroy(() => observer && observer.disconnect());
+  onDestroy(() => {
+    observer?.disconnect();
+  });
 </script>
 
-<div bind:this={el} class="watch">
+<div bind:this={el}>
   <slot />
 </div>
-
-<style>
-.watch {
-  min-height: 80vh;        /* controls scroll spacing */
-  display: flex;
-  align-items: flex-end;
-}
-</style>
