@@ -5,70 +5,73 @@
   export let active = false;
 
   let visible = false;
-let timeoutId;
+  let timeoutId;
 
-$: {
-  if (active) {
-    if (timeoutId) clearTimeout(timeoutId);
-
-    // Slight delay after dot lands (feels intentional)
-    timeoutId = setTimeout(() => {
-      visible = true;
-    }, 180);
-  } else {
-    // Fade out faster than dot for clarity
-    timeoutId = setTimeout(() => {
+  $: {
+    if (active) {
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        visible = true;
+      }, 200);
+    } else {
+      if (timeoutId) clearTimeout(timeoutId);
       visible = false;
-    }, 200);
+    }
   }
-}
-
 </script>
 
-<div
-  class="label"
-  class:active={active}
-  style="left:{x + 18}px; top:{y - 8}px;"
->
-  {text}
-</div>
+{#if visible}
+  <div
+    class="label"
+    style="left:{x + 20}px; top:{y - 40}px;" 
+  >
+    <div class="label-arrow"></div>
+    <div class="label-text">{text}</div>
+  </div>
+{/if}
 
 <style>
 .label {
-  position: fixed;
+  position: absolute;
   z-index: 30;
   pointer-events: none;
-  z-index: 30;
-  outline: 2px solid wheat;
-  background: solid rebeccapurple;
-  color: #ffffff;
-  font-size: 0.9rem;
-  padding: 6px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  backdrop-filter: blur(6px);
-  letter-spacing: 0.02em;
-  opacity: 0;
-  transform: translateY(-6px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  transform-origin: left center;
+  animation: labelIn 0.3s ease-out;
+  transform: translateY(-100%);
 }
 
-.label.active {
-  opacity: 1;
-  transform: translateY(0);
-  animation: labelIn 260ms ease-out;
+.label-arrow {
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(0, 0, 0, 0.9);
+}
+
+.label-text {
+  background: rgba(0, 0, 0, 0.9);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: sans-serif;
 }
 
 @keyframes labelIn {
   from {
     opacity: 0;
-    transform: translateX(-6px) translateY(-4px);
+    transform: translateY(-90%);
   }
   to {
     opacity: 1;
-    transform: translateX(0) translateY(0);
+    transform: translateY(-100%);
   }
 }
-
 </style>

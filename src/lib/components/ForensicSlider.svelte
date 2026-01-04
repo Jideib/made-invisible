@@ -1,80 +1,96 @@
 <script>
-  import { onMount } from "svelte";
-
   export let before;
   export let after;
-  export let captionBefore = "Before";
-  export let captionAfter = "After";
-
-  let pos = 50;
-  let dragging = false;
-  let container;
-
-  function start() { dragging = true; }
-  function end() { dragging = false; }
-  function drag(e) {
-    if (!dragging) return;
-    const rect = container.getBoundingClientRect();
-    const x = e.clientX ?? e.touches?.[0]?.clientX;
-    pos = Math.min(100, Math.max(0, ((x - rect.left) / rect.width) * 100));
+  export let position = 50;
+  export let interactive = false;
+  
+  let sliderRef;
+  
+  function updateSlider(pos) {
+    if (!sliderRef) return;
+    sliderRef.style.clipPath = `inset(0 0 0 ${100 - pos}%)`;
   }
-
-  function handleKey(e) {
-    if (e.key === "ArrowLeft") pos = Math.max(0, pos - 3);
-    if (e.key === "ArrowRight") pos = Math.min(100, pos + 3);
-  }
-
-  onMount(() => {
-    pos = 0;
-    setTimeout(() => pos = 50, 500);
-  });
+  
+  $: updateSlider(position);
 </script>
 
-<div
-  class="slider"
-  bind:this={container}
-  role="slider"
-  aria-valuemin="0"
-  aria-valuemax="100"
-  aria-valuenow={pos}
-  tabindex="0"         
-  on:keydown={handleKey}
-  on:pointerdown={start}
-  on:pointerup={end}
-  on:pointerleave={end}
-  on:pointermove={drag}
-  on:touchstart={start}
-  on:touchend={end}
-  on:touchmove={drag}
->
-  <img class="before-img" src={before} alt={captionBefore} loading="lazy" />
-  <img class="after-img" src={after} alt={captionAfter} loading="lazy" style="clip-path: inset(0 0 0 {100-pos}%);" />
-
-  <div class="divider" style="left:{pos}%">
-    <div class="knob">⇆</div>
+<div class="forensic-slider">
+  <!-- Before image -->
+  <div class="image-wrapper">
+    <img src={before} alt="Before incident" class="image before-image" />
   </div>
+  
+  <!-- After image (clipped) -->
+  <div 
+    class="image-wrapper after-wrapper"
+    bind:this={sliderRef}
+  >
+    <img src={after} alt="After incident" class="image after-image" />
+  </div>
+  
+  <!-- Slider handle (only for interactive) -->
+  {#if interactive}
+    <div class="slider-handle" style="left: {position}%">
+      <div class="handle-line"></div>
+      <div class="handle-dot"></div>
+    </div>
+  {/if}
 </div>
 
 <style>
-.slider {
-  position:relative;
-  width:100%;
-  aspect-ratio:16/9;
-  overflow:hidden;
-  border-radius:10px;
-  background:#111;
-  user-select:none;
-  cursor:ew-resize;
-  outline:none;
+.forensic-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #000;
 }
-.slider:focus { outline:2px solid #e63946; }
-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.divider { position:absolute; height:100%; width:2px; background:white; transform:translateX(-1px); }
-.knob {
-  position:absolute; top:50%; left:50%;
-  transform:translate(-50%,-50%);
-  background:#fff; padding:10px 12px;
-  border-radius:50%; font-size:16px;
-  color:#000; box-shadow:0 0 8px rgba(0,0,0,.4);
+
+.image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.after-wrapper {
+  clip-path: inset(0 0 0 50%);
+}
+
+.slider-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  transform: translateX(-50%);
+  cursor: ew-resize;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.handle-line {
+  width: 2px;
+  height: 100%;
+  background: #e10600;
+}
+
+.handle-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e10600;
+  border: 2px solid white;
+  box-shadow: 0 0 8px rgba(225, 6, 0, 0.5);
 }
 </style>

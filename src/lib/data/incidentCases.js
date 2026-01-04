@@ -4,143 +4,170 @@ export const incidentCases = [
     id: "odi-1999",
     year: 1999,
     location: "Odi, Bayelsa",
+    title: "Odi Massacre",
+    deaths: 900,
     coords: [6.2717, 4.7969],
     victims: "Hundreds to 900+ civilians",
-    short: "A full-scale military reprisal flattened an Ijaw community.",
+    short: "A full-scale military reprisal flattened the riverside community.",
     narrative: "Reprisal for killing of police officers",
+    summary: "The Odi massacre was a military assault by the Nigerian Armed Forces on the town of Odi in Bayelsa State. The attack was in response to the murder of 12 police officers by a local gang.",
     category: "reprisal"
   },
-
   // --- BENUE CLUSTER (3 dots, one scroll step) ---
   {
     id: "benue-zakibiam-2001",
     year: 2001,
     location: "Zaki-Biam, Benue",
+    title: "Zaki-Biam Killings",
+    deaths: 200,
     coords: [7.5167, 9.6167],
     victims: "200+ unarmed Tiv civilians",
     short: "Villagers assembled for a 'peace meeting' were executed.",
     narrative: "Reprisal after soldiers killed",
+    summary: "The Zaki-Biam killings occurred when Nigerian soldiers opened fire on villagers attending a peace meeting, killing over 200 people in retaliation for the deaths of 19 soldiers.",
     cluster: "benue-2001"
   },
   {
     id: "benue-gbeji-2001",
     year: 2001,
     location: "Gbeji, Benue",
+    title: "Gbeji Massacre",
+    deaths: 160,
     coords: [7.4500, 9.6333],
-    victims: "Part of same sweep",
+    victims: "Part of same sweep, 160 people died in Gbeji alone",
     short: "One of multiple Tiv villages raided",
     narrative: "Same reprisal sweep",
+    summary: "Part of the same military operation that targeted Tiv communities in Benue State following the killing of soldiers.",
     cluster: "benue-2001"
   },
   {
-    id: "benue-vase-2001",
+    id: "benue-vaase-2001",
     year: 2001,
-    location: "Vase, Benue",
+    location: "Vaase, Benue",
+    title: "Vaase Attack",
+    deaths: 160,
     coords: [7.3333, 9.5667],
     victims: "Part of same sweep",
     short: "Village invaded, homes burned",
     narrative: "Same reprisal operation",
+    summary: "Another village targeted in the military's reprisal operations against Tiv communities.",
     cluster: "benue-2001"
   },
-
   {
     id: "jos-2008",
     year: 2008,
     location: "Jos, Plateau",
+    title: "Jos Crises",
+    deaths: 47,
     coords: [9.8965, 8.8583],
     victims: "47 young unarmed Muslim men",
     short: "Arbitrary killings during unrest",
     narrative: "Internal security response",
+    summary: "During religious violence in Jos, security forces were accused of extrajudicial killings of young Muslim men.",
     category: "security-force-killing"
   },
-
   {
     id: "baga-2013",
     year: 2013,
     location: "Baga, Borno",
+    title: "Baga Destruction",
+    deaths: 185,
     coords: [13.1200, 13.8500],
     victims: "185+; 2,000+ homes burned",
     short: "Mass destruction after Boko Haram attack",
     narrative: "Reprisal 'mop-up'",
+    summary: "Following a Boko Haram attack, Nigerian forces razed much of Baga town, killing civilians and destroying homes.",
     category: "reprisal"
   },
-
-  // Detention deaths NOT mapped → removed per rule D
-
   {
     id: "bama-2013",
     year: 2013,
     location: "Bama, Borno",
+    title: "Bama Executions",
+    deaths: 35,
     coords: [11.8704, 13.6900],
     victims: "35 men shot after screening",
     short: "Mass shooting of detainees",
     narrative: "Screening execution",
+    summary: "Nigerian soldiers executed 35 detainees after screening them for suspected Boko Haram links.",
     category: "screening"
   },
-
   {
     id: "shia-zaria-2014",
     year: 2014,
     location: "Zaria, Kaduna",
+    title: "Zaria Shia Killings",
+    deaths: 33,
     coords: [11.0667, 7.7000],
     victims: "33 killed",
     short: "IMN protesters shot; detainees killed",
     narrative: "Suppression of protest",
+    summary: "Security forces attacked members of the Islamic Movement in Nigeria during a protest, killing dozens.",
     category: "protest"
   },
-
   {
     id: "nkpor-2016",
     year: 2016,
     location: "Nkpor, Onitsha, Anambra",
+    title: "Nkpor Massacre",
+    deaths: 150,
     coords: [6.1500, 6.8000],
     victims: "40–150 civilians",
     short: "Pro-Biafran commemoration massacre",
     narrative: "Suppression of IPOB rally",
+    summary: "Security forces opened fire on pro-Biafran protesters commemorating the declaration of Biafran independence.",
     category: "protest"
   },
-
   {
     id: "okporo-2021",
     year: 2021,
     location: "Okporo, Orlu, Imo",
+    title: "Okporo Raid",
+    deaths: 5,
     coords: [5.7860, 7.0288],
     victims: "5 killed",
     short: "Military raid in ESN zone",
     narrative: "Operation vs IPOB/ESN",
+    summary: "Military operation targeting the Eastern Security Network in Imo State resulted in civilian deaths.",
     category: "raid"
   },
-
   {
     id: "izombe-2021",
     year: 2021,
     location: "Izombe, Oguta LGA, Imo",
+    title: "Izombe Reprisal",
+    deaths: 3,
     coords: [5.6950, 6.9660],
     victims: "3 killed; 50+ houses burned",
     short: "Reprisal after soldiers killed",
     narrative: "Collective punishment",
+    summary: "Following the killing of soldiers, security forces razed homes in Izombe village.",
     category: "reprisal"
   },
-
   {
     id: "amangu-ohafia-2022",
     year: 2022,
     location: "Amangwu, Ohafia, Abia",
+    title: "Amangwu Attack",
+    deaths: 10,
     coords: [5.6125, 7.8200],
     victims: "10 killed",
     short: "Homes razed; missing soldier trigger",
     narrative: "Search & rescue claim",
+    summary: "Military operation in search of missing soldiers led to destruction of homes and civilian deaths.",
     category: "reprisal"
   },
-
   {
     id: "lamurde-2025",
     year: 2025,
     location: "Lamurde, Adamawa",
+    title: "Lamurde Protest Killings",
+    deaths: 9,
     coords: [9.2833, 11.4833],
     victims: "9 women protesters",
-    short: "The newest entry in a 25-year ledger- Army denies responsibility",
+    short: "The newest entry in a 25-year ledger - Protesters Killed. Army denies responsibility",
     narrative: "Denial — militia blamed",
+    summary: "Security forces allegedly killed women protesters, but the military denied involvement.",
     category: "protest"
   }
 ];
